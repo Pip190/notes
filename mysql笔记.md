@@ -199,3 +199,214 @@ select * from role where name like contact(``"%"``,``"三"``,``"%"``)；``即匹
 ```
 
 　　like contact模糊查询强大的地方在于可以对传进来的参数进行某查询，比如经前端提交上的数据，赋值给参数name，则可以select * from table where name like contact("%",${name},"%")
+
+
+
+
+
+# 索引
+
+```mysql
+create TABLE `customer`(
+	id INT(10) auto_increment,
+	customer_no VARCHAR(20),
+	customer_name VARCHAR(20),
+	PRIMARY KEY(id),
+	UNIQUE idx_customer_no(customer_no),
+	KEY idx_customer_name(customer_name),
+	KEY idx_customer_no_name(customer_no,customer_name)
+)
+
+DROP TABLE if EXISTS customer;
+create TABLE `customer`(
+	id INT(10),
+	customer_no VARCHAR(20),
+	customer_name VARCHAR(20)
+)
+# 创建主键索引
+ALTER TABLE customer add PRIMARY KEY(id);
+# 删除主键索引
+ALTER TABLE customer DROP PRIMARY KEY;
+# 创建唯一索引
+ALTER TABLE customer add UNIQUE idx_customer_no(customer_no);
+# 删除唯一索引
+DROP INDEX idx_customer_no ON customer;
+# 创建单值索引
+alter table customer add index idx_customer_name(customer_name);
+# 删除单值索引
+drop index idx_customer_name on customer;
+# 创建复合索引
+alter table customer add index idx_customer_no_name（customer_no，customer_name）；
+# 删除复合索引
+drop index idx_customer_no_name on customer；
+```
+
+调用索引例子
+
+```mysql
+DROP TABLE IF EXISTS person;
+CREATE TABLE person (
+PID int(11) AUTO_INCREMENT COMMENT '编号',
+PNAME varchar(50) COMMENT '姓名',
+PSEX varchar(10) COMMENT '性别',
+PAGE int(11) COMMENT '年龄',
+SAL decimal(7, 2) COMMENT '工资',
+PRIMARY KEY (PID)
+);
+-- 创建存储过程
+create procedure insert_person(in max_num int(10))
+begin
+	declare i int default 0;
+	set autocommit = 0;
+	repeat
+	set i = i +1;
+	insert into person (PID,PNAME,PSEX,PAGE,SAL) values (i,concat('test',floor(rand()*10000000)),IF(RAND()>0.5,'男','女'),FLOOR((RAND()*100)+10),FLOOR ((RAND()*19000)+1000));
+	until i = max_num
+	end repeat;
+commit;
+end;
+-- 调用存储过程
+call insert_person(30000000);
+
+select * from person where PNAME = "test7170209"; # 10.578s
+
+alter table person add index idx_pname(PNAME); # 118.357s
+DROP INDEX idx_pname ON person; # 0.025s
+select * from person where PNAME = "test7170209"; # 0.185s
+```
+
+用和不用的比较
+
+```mysql
+-- 不使用索引,根据pName进行查询
+select * from person where PNAME = "test1209325"; #10.813S
+给PNAME建立索引
+alter table person add index idx_pname(PNAME);
+select * from person where PNAME = "test1209325"; # 0.032S
+select * from person where PID = 2800000; #0.021
+```
+
+explain 分析查询语句
+
+```mysql
+-- 创建四张测试表
+CREATE TABLE t1(
+id INT(10) AUTO_INCREMENT,
+content VARCHAR(100),
+PRIMARY KEY (id)
+);
+CREATE TABLE t2(
+id INT(10) AUTO_INCREMENT,
+content VARCHAR(100),
+PRIMARY KEY (id)
+);
+CREATE TABLE t3(
+id INT(10) AUTO_INCREMENT,
+content VARCHAR(100),
+PRIMARY KEY (id)
+);
+CREATE TABLE t4(
+id INT(10) AUTO_INCREMENT,
+content VARCHAR(100),
+PRIMARY KEY (id)
+);
+-- 每张表中添加一条数据
+INSERT INTO t1(content) VALUES(CONCAT('t1_',FLOOR(1+RAND()*1000)));
+INSERT INTO t2(content) VALUES(CONCAT('t2_',FLOOR(1+RAND()*1000)));
+INSERT INTO t3(content) VALUES(CONCAT('t3_',FLOOR(1+RAND()*1000)));
+INSERT INTO t4(content) VALUES(CONCAT('t4_',FLOOR(1+RAND()*1000)));
+
+#id相同时,执行顺序是从上往下
+explain select * from t1,t2,t3 where t1.id=t2.id and t2.id = t3.id;
+#id不同时
+explain select t1.id from t1 where t1.id in
+(select t2.id from t2 where t2.id in
+(select t3.id from t3 where t3.id = 1)
+);
+#id相同和id不同
+explain select t2.* from t2,(select * from t3) s3 where s3.id = t2.id;
+-- select_type
+#simple 简单的select查询
+explain select * from t1;
+#derived 
+explain select * from (select t1.content from t1) s1;
+#subquery
+explain select t2.* from t2 where t2.id = (select t3.id from t3);
+-- tpye
+#Al1
+explain select * from t1 where t1.content = "abc";
+#system
+explain select * from (select t1.id from t1 where id = 1) t;
+#const 索引一次就找到了
+explain select * from t1 where id = 1;
+# eq_ref
+explain select t1.*,t2.*
+from t1
+join t2
+on t1. id = t2. id;
+#ref非唯一索引扫描
+alter table t1 add index idx_t1_content(content);
+explain select * from t1 where t1.content = "abc";
+# range
+explain select * from t2 where t2. id >0;
+# index
+explain select id, content from t1;
+-- possible keys key
+explain select * from t2 where t2. id =1;
+# 会让索引失效
+explain select * from t2 where t2. id is not null;
+-- ref
+explain select t2.*,t3.* from t2,t3 where t2. id = t3. id;
+
+-- rows     值越小越好
+#删除person上的索引
+drop index idx_pname on person;
+alter table person add index idx_pname(PNAME);
+explain select person.* from person where pname = "test3263609";
+```
+
+
+
+## 从最好到最差依次是：system>const>eq_ref>ref>range>index>All。一般来说，最好保证查询能达到 range 级别，最好能达到 ref。
+
+#### 3.1 索引失效
+
+1）最佳左前缀法则：如果索引了多列，要遵循最左前缀法则，指的是查询从索引的最左前列开始并且不跳过索引中的列。
+2）不在索引列上做任何计算、函数操作，会导致索引失效而转向全表扫描。
+3）存储引擎不能使用索引中范围条件右边的列。
+4）Mysal在使用不等于时无法使用索引会导致全表扫描。
+5）is null可以使用索引，但是is not null 无法使用索引。
+6）like以通配符开头会使索引失效导致全表扫描。
+7）字符串不加单引号索引会失效。
+8）使用 or 连接时索引失效。
+
+
+
+key_len的值越大越好，
+
+```mysql
+-- 索引失效情况
+explain select * from students where sname="小明" and age = 22 and score = 100;	#109
+explain select * from students where sname="小明" and age = 22;	#104
+explain select * from students where sname="小明";	#99
+explain select * from students where sname="小明" and score = 80; #99 --跳过中间字段失效
+-- 不在索引列上做任何计算、函数操作,会导致索引失效而转向全表扫描.
+explain select * from students where left(sname,2) = "小明";
+explain select * from students where left(sname,2) = "小明";
+-- 存储引擎不能使用索引中范围条件右边的列.
+explain select * from students where sname="小明" and age > 22 and score = 100;
+-- Mysql在使用不等于时无法使用索引会导致全表扫描.
+explain select * from students where sname!="小明";
+-- is null可以使用索引,但是is not null无法使用索引.
+explain select * from students where sname is not null;
+-- like以通配符开头会使索引失效导致全表扫描. （第一个不是通配符%不会失效）
+explain select * from students where sname like "%明%";
+-- 字符串不加单引号索引会失效.
+explain select * from students where sname = 123;
+-- 使用or连接时索引失效.
+explain select * from students where sname="小明" or age = 22;
+```
+
+## 慢查询
+
+![image-20230803120556689](https://raw.githubusercontent.com/Pip190/cloudimg/master/img/image-20230803120556689.png)
