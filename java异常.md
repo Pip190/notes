@@ -2,6 +2,18 @@ NumberFormatException
 
 SQLSyntaxErrorException
 
+SignatureException
+
+IllegalArgumentException
+
+NullPointerException
+
+JSONException
+
+EOFException
+
+
+
 算术异常类：ArithmeticExecption
 
 空指针异常类：NullPointerException
