@@ -15,3 +15,18 @@ mvn compile
 ![image-20230814003848418](https://raw.githubusercontent.com/Pip190/cloudimage/master/img/image-20230814003848418.png)
 
 ![image-20230814005408258](https://raw.githubusercontent.com/Pip190/cloudimage/master/img/image-20230814005408258.png)
+
+![image-20230815150442056](https://raw.githubusercontent.com/Pip190/cloudimg/master/img/image-20230815150442056.png)
+
+```xml
+<properties>
+  <maven.compiler.source>17</maven.compiler.source>
+  <maven.compiler.target>17</maven.compiler.target>
+  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+</properties>
+```
+
+```bash
+-DarchetypeCatalog=internal
+```
+
