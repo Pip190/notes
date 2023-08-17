@@ -47,4 +47,4 @@ echo======================    上传成功    ====================
 echo.
 echo.
 echo 5秒后自动关闭窗口
-timeout /t 5 >NUL
+timeout /t 5 
