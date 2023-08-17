@@ -19,7 +19,7 @@ if %errorlevel% equ 0 (
     echo.
     echo 没有待提交的更改。
     echo.
-    pause
+    timeout /t 5 
     exit /b
 )
 
