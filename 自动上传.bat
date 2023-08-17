@@ -1,23 +1,12 @@
 @echo off
 chcp 65001
-echo.
-echo                                      GitHub自动上传脚本
-echo ===================================================================================
-echo.
-
-set /p branch=master
-set /p change=上传
-echo.
-cd "C:\Users\ASUS\Desktop\notes"
-
-git pull
+echo "-------开始上传-------"
+git status
+set  /p  msg=请输入提交注释:
 git add .
-git commit -m %change%
-git push origin %branch%
-
-echo.
-echo ===================================================================================
-echo                                      更新完毕
-echo.
-
+git commit -m %msg%
+git pull
+git push
+echo 推送成功：【%msg%】
+echo "--------上传完成--------"
 pause
