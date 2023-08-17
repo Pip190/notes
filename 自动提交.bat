@@ -5,6 +5,7 @@ set "defaultCommitMessage=%formattedDateTime%"
 set "notesFolder=%USERPROFILE%\Desktop\notes"
 cd "%notesFolder%"
 git pull
+git status
 git add .
 echo.
 echo====================    拉取、添加成功    ================
