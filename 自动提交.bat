@@ -5,17 +5,9 @@ echo GitHub自动上传脚本
 echo ===================================================================================
 echo.
 
-:: 获取当前日期和时间，格式化为 "YYYY-MM-DD HH:MM:SS"
-for /f "delims=" %%a in ('wmic os get localdatetime ^| find "."') do set "datetime=%%a"
-set "year=%datetime:~0,4%"
-set "month=%datetime:~4,2%"
-set "day=%datetime:~6,2%"
-set "hour=%datetime:~8,2%"
-set "minute=%datetime:~10,2%"
-set "second=%datetime:~12,2%"
-set "formattedDateTime=%year%-%month%-%day% %hour%:%minute%:%second%"
+for /f %%a in ('powershell -command "Get-Date -Format 'yyyy-MM-dd HH:mm:ss'"') do set "formattedDateTime=%%a"
 
-set "defaultCommitMessage=Auto commit - %formattedDateTime%"
+set "defaultCommitMessage=%formattedDateTime%"
 
 set "notesFolder=%USERPROFILE%\Desktop\notes"
 
