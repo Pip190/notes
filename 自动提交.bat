@@ -2,7 +2,7 @@
 >NUL chcp 65001
 for /f %%a in ('powershell -command "Get-Date -Format 'yyyy-MM-dd HH:mm:ss'"') do set "formattedDateTime=%%a"
 set "computerUserName=%USERNAME%"
-set "defaultCommitMessage=用户 %computerUserName% %formattedDateTime%"
+set "defaultCommitMessage=%computerUserName% %formattedDateTime%"
 set "notesFolder=%USERPROFILE%\Desktop\notes"
 cd "%notesFolder%"
 echo.
