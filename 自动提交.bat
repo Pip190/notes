@@ -4,9 +4,12 @@ for /f %%a in ('powershell -command "Get-Date -Format 'yyyy-MM-dd HH:mm:ss'"') d
 set "defaultCommitMessage=%formattedDateTime%"
 set "notesFolder=%USERPROFILE%\Desktop\notes"
 cd "%notesFolder%"
+echo.
+echo======================    拉取成功    ====================
+echo.
 git pull
 echo.
-echo=====================    当前文件状态    ================
+echo=====================    当前文件状态    ==================
 echo.
 git status
 
@@ -22,7 +25,7 @@ if %errorlevel% equ 0 (
 
 git add .
 echo.
-echo====================    拉取、添加成功    ================
+echo======================    添加成功    ====================
 echo.
 git commit -m "%defaultCommitMessage%"
 if errorlevel 1 (
