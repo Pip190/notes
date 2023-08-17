@@ -5,10 +5,17 @@ echo GitHub自动上传脚本
 echo ===================================================================================
 echo.
 
-:: 获取当前日期和时间作为默认提交信息
-for /f "tokens=2-4 delims=/ " %%a in ('date /t') do (set "currentDate=%%c-%%a-%%b")
-for /f "tokens=1-2 delims=: " %%a in ('time /t') do (set "currentTime=%%a%%b")
-set "defaultCommitMessage=Auto commit - %currentDate% %currentTime%"
+:: 获取当前日期和时间，格式化为 "YYYY-MM-DD HH:MM:SS"
+for /f "delims=" %%a in ('wmic os get localdatetime ^| find "."') do set "datetime=%%a"
+set "year=%datetime:~0,4%"
+set "month=%datetime:~4,2%"
+set "day=%datetime:~6,2%"
+set "hour=%datetime:~8,2%"
+set "minute=%datetime:~10,2%"
+set "second=%datetime:~12,2%"
+set "formattedDateTime=%year%-%month%-%day% %hour%:%minute%:%second%"
+
+set "defaultCommitMessage=Auto commit - %formattedDateTime%"
 
 set "notesFolder=%USERPROFILE%\Desktop\notes"
 
