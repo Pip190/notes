@@ -6,9 +6,13 @@ set "notesFolder=%USERPROFILE%\Desktop\notes"
 cd "%notesFolder%"
 git pull
 git add .
-echo================拉取、添加成功================
+echo
+echo====================拉取、添加成功================
+echo
 git commit -m "%defaultCommitMessage%"
-echo================提交成功====================
+echo
+echo====================提交成功====================
+echo
 if errorlevel 1 (
     echo 提交时出现错误。请检查并解决问题。
     pause
@@ -20,5 +24,7 @@ if errorlevel 1 (
     pause
     exit /b
 )
-echo================上传成功====================
+echo
+echo====================上传成功====================
+echo
 pause
