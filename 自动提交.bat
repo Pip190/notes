@@ -5,11 +5,10 @@ set "defaultCommitMessage=%formattedDateTime%"
 set "notesFolder=%USERPROFILE%\Desktop\notes"
 cd "%notesFolder%"
 git pull
-echo		拉取成功
 git add .
-echo		添加成功
+echo================拉取、添加成功================
 git commit -m "%defaultCommitMessage%"
-echo		提交成功
+echo================提交成功====================
 if errorlevel 1 (
     echo 提交时出现错误。请检查并解决问题。
     pause
@@ -21,5 +20,5 @@ if errorlevel 1 (
     pause
     exit /b
 )
-echo		上传成功
+echo================上传成功====================
 pause
