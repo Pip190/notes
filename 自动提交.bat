@@ -1,5 +1,5 @@
 @echo off
-chcp 65001
+>NUL chcp 65001
 for /f %%a in ('powershell -command "Get-Date -Format 'yyyy-MM-dd HH:mm:ss'"') do set "formattedDateTime=%%a"
 set "defaultCommitMessage=%formattedDateTime%"
 set "notesFolder=%USERPROFILE%\Desktop\notes"
