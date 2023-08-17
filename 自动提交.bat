@@ -42,20 +42,6 @@ if errorlevel 1 (
 echo.
 echo======================    上传成功    ====================
 echo.
-call :Countdown 5
-exit /b
-
-:Countdown
-setlocal enabledelayedexpansion
-set "count=%1"
-for /l %%i in (%count%,-1,1) do (
-    cls
-    echo =====================    当前文件状态    ====================
-    echo.
-    git status
-    echo.
-    echo 关闭窗口倒计时: %%i 秒
-    ping 127.0.0.1 -n 2 >NUL
-)
-endlocal
-exit /b
+echo.
+echo 关闭窗口倒计时: 5秒
+timeout /t 5 >NUL
