@@ -42,4 +42,4 @@ if errorlevel 1 (
 echo.
 echo======================    上传成功    ====================
 echo.
-pause
+timeout /t 5 >NUL
