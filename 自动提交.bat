@@ -9,6 +9,17 @@ echo.
 echo=====================    当前文件状态    ================
 echo.
 git status
+
+:: 检查是否有待提交的更改
+git diff-index --quiet HEAD --
+if %errorlevel% equ 0 (
+    echo.
+    echo 没有待提交的更改。
+    echo.
+    pause
+    exit /b
+)
+
 git add .
 echo.
 echo====================    拉取、添加成功    ================
