@@ -10,14 +10,14 @@ echo.
 echo====================    拉取、添加成功    ================
 echo.
 git commit -m "%defaultCommitMessage%"
-echo.
-echo======================    提交成功    ====================
-echo.
 if errorlevel 1 (
     echo 提交时出现错误。请检查并解决问题。
     pause
     exit /b
 )
+echo.
+echo======================    提交成功    ====================
+echo.
 git push origin master
 if errorlevel 1 (
     echo 推送时出现错误。请检查并解决问题。
