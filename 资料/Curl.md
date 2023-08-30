@@ -537,3 +537,279 @@ curl可以这样模拟：
 
 - 版权声明：自由转载-非商用-非衍生-保持署名（[创意共享3.0许可证](http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh)）
 - 发表日期： 2011年9月 4日
+
+
+
+# Linux Curl命令详解教程
+
+curl是用于在本地计算机与远程服务器之间传输数据的命令行工具
+
+- [![myfreax](data:image/webp;base64,UklGRmoEAABXRUJQVlA4WAoAAAAQAAAAHwAAHwAAQUxQSNsBAAABkHZb25nH6p/athl0bNu2bdu2bdu2bdueqe2+TnJ9eJI0ExETQFSW2PhXMH6YHki0bvJeAgDLZV6jij+geM1fE7t9UBZGa8L8U4Hrzlo00Kn5Gfa/4st5u1gXi/2npuj1m9tbu3gWw+GUGlnTXnd1VtuKhdzq6kjLNDlLkUJ2FRVWIU17dZqVTmVM3KTw0ldFm3cG0fz68Lc7It75dDTKPYpQCn0H+kyZtUBhC69bcjjorNBAJ/O4zh8At3zLPxQAQcCXYIWmBpm35wFAXGwbuBMFM/rM62SjUDFTJt9AIacNWY3MCkTtVBGABOX3A/8BS6xVWC0/t/ix+FynJBVJQFp9FcTHxXo34gUl+VflVBBSJw0aXnRXwT6ClgX1lex2Q1NxgFLId23MnZWCv2rzI1bJZgMl5Esy5myJKppgK2cfWXdCCgBTspwhXqR+b5zbv4aPDXGqfCVfJ0LW+PgXVIuvOoQ6h/IDtyxJgCVeB1wq1+3LVwHmeB0swu3Tv4ZyfKhLOMuybY8uqDc7J7d3TFzt5t9M2+uNPrF0RdUS9Uqy4S7Exi0wIppjGL7fiBIcx7DdxpZhGJ5lmNjwADcbQts6ufsGhYVHxLIsx8VGx8ZEhQX5ejjZEkIIAFZQOCBoAgAAUA4AnQEqIAAgAD6ROJZHpaMiITAIALASCWwAwRVBOo/o1MBwAOYB/ZrAA3inyZqWk9Jx+v8B4gbV3eCOEfy3/Jd4FAq8wNG96Df+L5PtQb9U/9L+aned9FX9gFt39jHS/ayon8wEnc1E+6Ehu+XloXmMQZCzaI1+FZgAAP7/OlArOJg+m8aTkofO99+tBmzz/5RUt09fHtgL+FwDYhLG1U4Ne2n8l8qpof1itu7GQtHysDhk/Qe2uK+XzFk8CSpdJ4Y/4/qqLO13gPCm7zONXKsC5zTd2qOfuuJCvbXf9V6Ge/MMoOi1aubP/zRL2vhCbRjG6l88794/ofph/LNew11j6MHyK6dHD9551oRwdSeF5fQsSGevD7/0jZhfe4ttlU0G5JHgux1q8PCvonch2p+H9TWcTxurlM0LEHh03TeWI+h0qVVWqEvqmtX/+MWur/8WYMRrPvTH46PEaTyOYZ7+mLlmQzPyXe0s3bVt+8FOj9fh/J3X/31qcTRr3Tf1g+udh8UH/p/x9EOIWnn9HVPlMzsJG0Sq/u+g/mt29v5Z4P0Choo61qByRp7qCYjx0yerQkEfOPGNhnQEoWOiQCYkCDlrLzTpVrGZ1fl8ArxhQrjOKsOBWM2InypRHm3mXEDE6bMd739Qt4dfhb7I4YaqsJFIajg8fSlH4yw2vqfM3OrrM0qvZnK0V1qE+WGGZ/aOK5BlgJIXX8LoSs+amKTx9PIJB595ubhsSIyUocIx3v1UJrsgQEGm2XqRGs4WInQtXeo8mO4w5eMVrazXHbmeN+am4tj2W2M/ux60h0/2UZCVkFgAAA==)](https://www.myfreax.com/curl-command-examples/)
+
+Updated At 7 Jan 2023 12 min read
+
+By [myfreax](https://www.myfreax.com/author/myfreax/)
+
+![Linux Curl命令详解教程](https://www.myfreax.com/content/images/size/w816/2019/10/curl-command-examples.webp)Linux Curl命令详解教程
+
+Curl 是用于在本地计算机与远程服务器之间传输数据的命令行工具。使用curl时您可以使用HTTP，HTTPS，[SCP ](https://www.myfreax.com/how-to-use-scp-command-to-securely-transfer-files/)，[ SFTP](https://www.myfreax.com/how-to-use-linux-sftp-command-to-transfer-files/)和[FTP](https://www.myfreax.com/how-to-use-linux-ftp-command-to-transfer-files/)等协议下载或上传数据。
+
+Curl 提供了许多选项，使您可以恢复上传/下载，限制带宽，代理支持，用户身份验证等。
+
+在本教程中，我们将说明如何在Linux使用Curl命令下载文件及其选项的详解。如果您未指定使用的协议，Curl默认使用HTTP协议。
+
+Curl 命令已预安装在大多数Linux发行版。要检查你的Linux发行版是否已安装Curl，请按快捷键`CTRL+ALT+T`打开终端，键入`curl`，然后按Enter。
+
+## 安装 Curl
+
+如果已安装curl，则系统将打印`curl: try 'curl --help' or 'curl --manual' for more information`。
+
+否则终端打印消息curl command not found `curl`命令未找到。如果你尚未安装Curl，则可以使用发行版的软件包管理器安装`curl`。
+
+如果你的计算机运行的是基于Debian的Linux发行版，例如Ubuntu，Linux Mint等。请运行`sudo apt install curl`命令安装curl。
+
+如果你的计算机运行的是基于Redhat的Linux发行版，例如CentOS，Fedora等。请运行`sudo yum install curl`命令安装Curl。
+
+```shell
+sudo yum install curl
+sudo apt install curl
+```
+
+## Curl 命令与选项
+
+`curl`命令的语法形式是`curl [options] [URL...]`，`options` Curl的[选项](https://curl.haxx.se/docs/manpage.html)，可选参数。`URL`表示远程服务器的地址。
+
+在不指定任何选项运行Curl命令时，curl命令下载指定的URL资源并重定向到[标准输出](https://www.myfreax.com/stdout-stdin-and-redirection/)。
+
+例如命令`curl https://www.google.com/`下载Google首页并在终端打印Google首页的源码。
+
+## 发送 JSON Body
+
+在发送JSON Body到服务器时，你需要设置header的`Content-Type`为`application/json`，指示Curl命令以JSON的格式发送Body的数据。
+
+除了设置header的`Content-Type`之外，还需要使用Curl命令的`-d`/`--data`指定要发送的JSON字符串，注意JSON需要使用单引号转义。
+
+例如命令`curl -X POST -H "Content-Type: application/json"  -d 'JSON String' URL`发送JSON字符串`{"email":"web@myfreax.com"}`到服务器。
+
+```shell
+curl -X POST -H "Content-Type: application/json"  -d '{"email":"web@myfreax.com","website":"myfreax.com"}' http://127.0.0.1:3000/site
+```
+
+## POST JSON并上传文件
+
+在发送JSON数据并上传文件到服务器时，需要设置 header 的 Content-Type 为 multipart/mixed，指示 Curl 命令以混合的格式发送数据。
+
+除了设置 header 的 Content-Type 之外，发送 JSON 格式数据是以 Curl 命令的 -F 选项指定要发送的 JSON 字符串，注意 JSON 需要使用单引号转义。
+
+因此命令最终形式是 curl -X POST -H "Content-Type: multipart/mixed" -F blob=@文件路径 -F 'metadata=JSON 字符串;type=application/json' 。
+
+```shell
+curl -i -X POST -H "Content-Type: multipart/mixed" -F "blob=@/Users/username/Documents/bio.jpg" -F "metadata={\"edipi\":123456789};type=application/json" http://localhost:8080/api/v1/user/
+```
+
+## 仅上传文件
+
+要使用 Curl 命令上传文件，只需要仅使用 Curl 命令的 -F 选项以键值对的形式name=content 指定 multipart MIME 数据。
+
+但在使用 -F 选项指定文件时，需要在文件路径之前添加`@`符号。文件可以是任何类型文件包括图像，文档等。
+
+例如参数 `-F 'image=@/home/user/Pictures/wallpaper.jpg'` 指定Key是 image ，文件是 /home/user/Pictures/wallpaper.jpg。
+
+```shell
+curl -X POST -F 'image=@/home/user/Pictures/wallpaper.jpg' http://example.com/upload
+```
+
+## HTML 表单 multipart/form-data
+
+如果你需要使用Curl 命令模拟表单的请求，可以使用Curl 命令的`-F`选项创建POST请求并且使用`multipart/form-data`进行编码。
+
+`-F`选项允许你指定multipart的数据。Curl 命令自动将内容类型设置为`multipart/form-data`发送数据。
+
+也可以使用`-F`选项指定多个数据，数据的形式是以`field=value`键值对的方式指定。
+
+例如以下Curl 命令将模拟HTML表单发送两个字段的数据，字段website 值是myfreax.com，字段email 值是web@myfreax.com。最后是指定请求的URL。
+
+```shell
+curl -X POST -F 'website=myfreax.com' -F 'email=web@myfreax.com' https://wwww.myfreax.com/contact.php
+```
+
+## HTML 表单 x-www-form-urlencoded
+
+发出POST请求的另一种方法是使用Curl 命令的`-d`选项。在使用`-d`选项时Curl命令使用`application/x-www-form-urlencoded`对数据进行编码。
+
+也会指定内容类型为`application/x-www-form-urlencoded`。使用这种方式发送的请求，就是使用查询字符串发送数据。
+
+如果你需要发送大量的数据你不必多次使用`-d`选项，可以使用`&`符号合并数据，比如website=myfreax&email=myfreax@example.com。
+
+```shell
+curl -X POST -d 'name=myfreax' -d 'email=myfreax@example.com' https://example.com/contact.php
+
+#上面和下面的命令是等价的
+curl -X POST -d 'name=myfreax&email=myfreax@example.com' https://example.com/contact.php
+```
+
+## 发送 Header
+
+如果要发送Header到服务器，可以使用Curl命令的`-H`/`--header`选项，它允许指定Header的键Key和值Value。
+
+Header的Key和Value之间必须使用空格，并且header使用双引号包裹，避免shell的解释。
+
+可以同时使用多个`-H`/`--header`选项来指定多个Header的Key和Value。你可以看到下面的命令将会发送多个Header。
+
+第一个header设置内容类型`Content-Type: application/json`，第二个header发送`website: myfreax.com`。
+
+```shell
+curl -X POST -H "Content-Type: application/json" -H "website: myfreax.com"  -d '{"email":"web@myfreax.com","website":"myfreax.com"}' http://127.0.0.1:3000/site
+```
+
+## 下载文件
+
+默认情况下`curl`命令下载URL指定资源并重定向[标准输出](https://www.myfreax.com/stdout-stdin-and-redirection/)。如果要保存下载到文件，可以使用`curl`命令的`-o`或`-O`选项。
+
+使用小写`-o`选项时，你可以指定保存文件的名称，也可以指定绝对路径，Curl命令将会把文件下载到你指定绝对路径。
+
+Curl命令的大写`-O`选项将使用其原始文件名保存到文件在当前目录，也就是运行`curl`命令所在的目录。
+
+例如命令`curl -O https://cdn.jsdelivr.net/npm/vue/dist/vue.js`下载vue.js文件到当前的目录中。
+
+命令`curl -o /home/myfreax/vue3.js https://cdn.jsdelivr.net/dist/vue.js`下载文件vue.js保存到文件`/home/myfreax/vue3.js`。
+
+下载完成后，可以运行[ls命令](https://www.myfreax.com/how-to-list-files-in-linux-using-the-ls-command/)列出curl下载的文件。`ls vue*`表示列出名称包含vue字符串的文件。
+
+```bash
+curl -o /home/myfreax/work/vue.js https://cdn.jsdelivr.net/npm/vue/dist/vue.js
+
+curl -O https://cdn.jsdelivr.net/npm/vue/dist/vue.js
+
+ls vue* #查看刚下载文件
+```
+
+## 下载多个文件
+
+要一次下载多个文件，请使用多个`-O`选项或者小写的`-o`选项，后跟要下载文件的URL。
+
+与使用`curl`命令下载单个文件一样。当使用小写的`-o`选项时你需要指定的下载目录路径。使用大写`-O`选项会保存当前目录下。
+
+还可以混合使用小写的`-o`选项和大写`-O`选项。下面的`curl`命令在使用`-O`选项时下载vue.js文件到当前的目录，以名称`vue.js`保存文件。
+
+小写`-o`选项下载vue.js文件myfreax用户的家目录下的wrok目录，并将文件保存为`vue.js`。
+
+```shell
+curl -o /home/myfreax/work/vue.js https://cdn.jsdelivr.net/npm/vue/dist/vue.js \
+-O https://cdn.jsdelivr.net/npm/vue/dist/vue.js
+
+ls /home/myfreax/work/vue.js && ls vue.js #查看刚下载文件
+```
+
+## 断点续传/恢复下载
+
+如果您在下载大文件期间断开连接。无需重新开始下载，可以使用`curl`命令的`-C -`选项恢复上一次的下载。
+
+也可以在第一次下载文件时直接指定`-C -`选项，当下载大文件断开连接时，直接使用之前的命令即可恢复下载。
+
+但有一点值得注意点是，Curl命令的断点续传/恢复下载需要服务器端支持断点续传，否则Curl会重新开始下载文件。
+
+```bash
+curl -C - -O https://releases.ubuntu.com/22.04/ubuntu-22.04-desktop-amd64.iso
+```
+
+## 查看 HTTP 响应头 Header
+
+HTTP 响应头是使用冒号分隔的键/值对，其中包含服务器类型，通常是Nginx/Apache，内容类型和 HTTP 状态码等信息。
+
+Curl 命令的 `-I` 选项允许你查看指定 URL 资源的 HTTP 响应头，也包括在 Nginx 或者 Apache 设置的自定义响应头。
+
+例如命令 curl -I https://www.myfreax.com/ 打印URL `https://www.ubuntu.com/`响应头。
+
+```bash
+curl -I --http2 https://www.ubuntu.com/
+```
+
+## 测试 HTTP/2 的支持
+
+要检查指定的 URL 是否支持 HTTP/2 协议，请组合使用 Curl 命令的 `-I` 和 `--http2`选项查看 HTTP 响应头，然后使用 [grep 命令](https://www.myfreax.com/how-to-use-grep-command-to-search-files-in-linux/)搜索[标准输出](https://www.myfreax.com/stdout-stdin-and-redirection/)。
+
+如果你使用的 Curl 版本 7.47.0 或更高版本，则不需要使用 `--http2` 选项。默认情况下，Curl 默认使用 HTTP/2 协议进行连接。
+
+Curl 命令的 `-s` 选项以静默方式运行 Curl 并隐藏进度和错误消息。如果远程服务器支持 HTTP/2 协议，终端打印消息 `HTTP/2.0 200`，否则是 `HTTP/1.1 200`。
+
+```shell
+curl -I --http2 -s https://www.myfreax.com/ | grep HTTP/2
+HTTP/2 200
+```
+
+## 301 HTTP 重定向
+
+如果尝试在没有 `www` 的情况下抓取 google.com 主页，你会注意到 Google 返回是301页面的内容，运行命令 `curl google.com`。
+
+从 301 重定向的页面内容中可以看到，`google.com` 被重定向到 www 版本。并且在默认情况下 Curl 命令不遵循HTTP Location header。
+
+因此你不会获得 Google 主页的源码。要跟随 301 重定向请使用 Curl 命令的`-L`/`--location`选项，Curl 命令直到服务器不返回状态码 301 才会终止。
+
+```shell
+curl -L google.com
+```
+
+## 指定用户代理 User-Agent
+
+你应该遇到在使用不同浏览器时，有的浏览器可以下载，或者某个浏览器不能下载的情况。或者根据访问者的设备和浏览器，提供的不同页面内容。
+
+这是因为服务器程序根据用户代理User-Agent 进行区分用户的设备类型，从而确定返回不同的内容或者阻止你的下载与访问。
+
+为了避免服务器根据访问者的User-Agent 用户代理提供不同内容。请使用`curl`命令的`-A`选项模拟User-Agent 用户代理。
+
+```bash
+curl -A "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0" https://getfedora.org/
+```
+
+## 限制下载速度
+
+Curl命令的`--limit-rate`选项允许您限制数据传输速度/速率。默认的速度的单位是字节。也可以使用`k`，`m`，`g`作为后缀，表示以不同的单位作为下载速度。
+
+Curl命令将下载Go二进制文件并将下载速度限制为1MB，`-O`选项表示保存到文件在当前目录。
+
+```bash
+curl --limit-rate 1m -O https://dl.google.com/go/go1.10.3.linux-amd64.tar.gz
+```
+
+## 下载/上传 FTP 文件
+
+Curl命令除了支持HTTP协议之外，还支持FTP协议文件下载和上传，以及列出FTP服务器的文件。
+
+如果你需要使用`curl`命令访问受保护的FTP服务器，请使用Curl命令的`-u`选项并指定用户名和密码。
+
+Curl命令的`-T`选项允许你将文件上传到FTP服务器，`-T`选项之后是您要上传的文件，也可以指定文件的绝对路径。
+
+```shell
+curl -u FTP_USERNAME:FTP_PASSWORD ftp://ftp.example.com/ #列出文件
+
+curl -u FTP_USERNAME:FTP_PASSWORD ftp://ftp.example.com/file.tar.gz #下载文件
+
+curl -T newfile.tar.gz -u FTP_USERNAME:FTP_PASSWORD ftp://ftp.example.com/ #上传文件
+```
+
+## 发送 Cookie
+
+使用curl发出HTTP请求时，默认情况下，Curl命令不发送或存储任何Cookie信息。有时您可能需要指定Cookie发起HTTP请求才能访问服务器资源。
+
+Curl命令的`-b`选项允许你将指定Cookie信息发送到服务器，请在`-b`选项后跟Cookie字符串或者包含Cookie的文件名称。
+
+例如，你要下载Oracle Java JDK的[rpm文件](https://www.myfreax.com/how-to-install-rpm-packages-on-centos/)`jdk-10.0.2_linux-x64_bin.rpm`，您需要发送Cookie键值对`oraclelicense=a`。
+
+```shell
+curl -L -b "oraclelicense=a" -O http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/jdk-10.0.2_linux-x64_bin.rpm
+```
+
+## 使用代理服务器
+
+Curl命令支持不同类型的代理，包括HTTP，HTTPS和SOCKS。要通过指定代理服务传输数据，请使用Curl命令`-x`/`--proxy`选项，后跟代理服务器URL。
+
+如果代理服务器需要身份验证，请使用Curl命令的`-U`/`--proxy-user`选项，后跟用冒号分隔的用户名和密码。
+
+例如命令`curl -x 192.168.44.1:8888 URL`使用代理服务器`192.168.44.1:8888`。`curl -U 用户名:密码 -x URL`指定代理服务器用户名与密码。
+
+```shell
+curl -x 192.168.44.1:8888 http://linux.com/
+
+curl -U mark:Passvv0rd -x 192.168.44.1:8888 http://linux.com/
+```
