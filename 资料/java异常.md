@@ -12,6 +12,8 @@ JSONException
 
 EOFException
 
+TooManyResultsException
+
 
 
 算术异常类：ArithmeticExecption
