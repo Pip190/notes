@@ -14,6 +14,8 @@ EOFException
 
 TooManyResultsException
 
+BeanCurrentlyInCreationException	当前bean正在处于创建中异常
+
 
 
 算术异常类：ArithmeticExecption
