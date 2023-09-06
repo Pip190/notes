@@ -133,3 +133,56 @@ Spring实现事务的两种方式编程式事务
 
 
 ![image-20230904164909424](https://raw.githubusercontent.com/Pip190/cloudimg/master/img/image-20230904164909424.png)
+
+
+
+**事务超时**
+代码如下：
+
+```java
+@Transactional（timeout = 10）
+```
+
+以上代码表示设置事务的超时时间为10秒。
+**表示超过10秒如果该事务中所有的DML语句还没有执行完毕的话，最终结果会选择回滚。**
+默认值-1，表示没有时间限制。
+**这里有个坑，事务的超时时间指的是哪段时间？**
+**在当前事务当中，最后一条DML语句执行之前的时间。如果最后一条DML语句后面很有很多业务逻辑，这些业务代码执行的时间不被计入超时时间。**
+**只读事务**
+代码如下：
+
+```java
+@Transactional（readOnly = true）
+```
+
+将当前事务设置为只读事务，在该事务执行过程中只允许select语句执行， delete insertupdate均不可执行。
+该特性的作用是：**启动spring的优化策略。提高select语句执行效率。**
+如果该事务中确实没有增删改操作，建议设置为只读事务。
+
+**设置哪些异常回滚事务**
+代码如下：
+
+```java
+@Transactional（rollbackFor = RuntimeException.class）
+```
+
+表示只有发生RuntimeException异常或该异常的子类异常才回滚。
+**设置哪些异常不回滚事务**
+代码如下：
+
+```java
+@Transactional（noRollbackFor = NullPointerException.class）
+```
+
+表示发生NullPointerException或该异常的子类异常不回滚，其他异常则回滚。
+
+
+
+全注解式事务
+
+![image-20230906101639227](https://raw.githubusercontent.com/Pip190/cloudimg/master/img/image-20230906101639227.png)
+
+![image-20230906101703695](https://raw.githubusercontent.com/Pip190/cloudimg/master/img/image-20230906101703695.png)
+
+
+
