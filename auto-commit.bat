@@ -1,14 +1,17 @@
 @echo off
 >NUL chcp 65001
 :: 获取当前日期和时间，格式化为 "YYYY-MM-DD HH:MM:SS"
-for /f "delims=" %%a in ('wmic os get localdatetime ^| find "."') do set "datetime=%%a"
-set "year=%datetime:~0,4%"
-set "month=%datetime:~4,2%"
-set "day=%datetime:~6,2%"
-set "hour=%datetime:~8,2%"
-set "minute=%datetime:~10,2%"
-set "second=%datetime:~12,2%"
-set "defaultCommitMessage=%USERNAME%  %year%-%month%-%day% %hour%:%minute%:%second%"
+for /f "tokens=2-4 delims=/ " %%a in ('powershell -Command "Get-Date -Format yyyy-MM-dd HH:mm:ss"') do ( 
+       set "year=%%a" 
+       set "month=%%b" 
+       set "day=%%c" 
+   ) 
+   for /f "tokens=1-3 delims=: " %%a in ('powershell -Command "Get-Date -Format HH:mm:ss"') do ( 
+       set "hour=%%a" 
+       set "minute=%%b" 
+       set "second=%%c" 
+   ) 
+   set "defaultCommitMessage=%USERNAME%  %year%-%month%-%day% %hour%:%minute%:%second%"
 set "notesFolder=%USERPROFILE%\Desktop\notes"
 cd "%notesFolder%"
 echo.
