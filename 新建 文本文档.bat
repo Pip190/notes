@@ -1,5 +1,16 @@
 @echo off
 >NUL chcp 65001
+:: 获取当前日期和时间，格式化为 "YYYY-MM-DD HH:MM:SS"
+for /f "delims=" %%a in ('wmic os get localdatetime ^| find "."') do set "datetime=%%a"
+set "year=%datetime:~0,4%"
+set "month=%datetime:~4,2%"
+set "day=%datetime:~6,2%"
+set "hour=%datetime:~8,2%"
+set "minute=%datetime:~10,2%"
+set "second=%datetime:~12,2%"
+set "defaultCommitMessage=%USERNAME%  %year%-%month%-%day% %hour%:%minute%:%second%"
+set "notesFolder=%USERPROFILE%\Desktop\notes"
+cd "%notesFolder%"
 echo.
 echo ==========================    拉取成功    ====================
 echo.
@@ -23,7 +34,7 @@ git add .
 echo.
 echo ==========================    添加成功    ====================
 echo.
-git commit -m "测试提交"
+git commit -m "%defaultCommitMessage%"
 if errorlevel 1 (
     echo 提交时出现错误。请检查并解决问题。
     pause
