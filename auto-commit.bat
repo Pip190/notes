@@ -1,7 +1,8 @@
 @echo off
 >NUL chcp 65001
 :: 获取当前日期和时间，格式化为 "YYYY-MM-DD HH:MM:SS"
-for /f "delims=" %%a in ('wmic os get localdatetime ^| find "."') do set "datetime=%%a"
+rem for /f "delims=" %%a in ('wmic os get localdatetime ^| find "."') do set "datetime=%%a"
+for /f "delims=" %%a in ('powershell -Command "Get-Date -Format yyyyMMddHHmmss"') do set "datetime=%%a"
 set "year=%datetime:~0,4%"
 set "month=%datetime:~4,2%"
 set "day=%datetime:~6,2%"
