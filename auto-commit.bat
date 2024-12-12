@@ -8,10 +8,7 @@ set "day=%datetime:~6,2%"
 set "hour=%datetime:~8,2%"
 set "minute=%datetime:~10,2%"
 set "second=%datetime:~12,2%"
-set /p userInput=请输入提交信息：
-set "defaultCommitMessage=%USERNAME% %userInput% %year%-%month%-%day% %hour%:%minute%:%second%"
-set "notesFolder=%USERPROFILE%\Desktop\notes"
-cd "%notesFolder%"
+
 echo.
 echo ==========================    拉取成功    ====================
 echo.
@@ -35,6 +32,10 @@ git add .
 echo.
 echo ==========================    添加成功    ====================
 echo.
+set /p userInput=请输入提交信息：
+set "defaultCommitMessage=%USERNAME% %userInput% %year%-%month%-%day% %hour%:%minute%:%second%"
+set "notesFolder=%USERPROFILE%\Desktop\notes"
+cd "%notesFolder%"
 git commit -m "%defaultCommitMessage%"
 if errorlevel 1 (
     echo 提交时出现错误。请检查并解决问题。
