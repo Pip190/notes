@@ -8,7 +8,8 @@ set "day=%datetime:~6,2%"
 set "hour=%datetime:~8,2%"
 set "minute=%datetime:~10,2%"
 set "second=%datetime:~12,2%"
-set "defaultCommitMessage=%USERNAME%  %year%-%month%-%day% %hour%:%minute%:%second%"
+set /p userInput=请输入提交信息：
+set "defaultCommitMessage=%USERNAME% %userInput% %year%-%month%-%day% %hour%:%minute%:%second%"
 set "notesFolder=%USERPROFILE%\Desktop\notes"
 cd "%notesFolder%"
 echo.

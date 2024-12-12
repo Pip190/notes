@@ -1,1 +1,0 @@
-![image-20241211221232267](https://github.com/Pip190/cloudimg/img/image-20241211221232267.png)
