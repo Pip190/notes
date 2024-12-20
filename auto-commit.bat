@@ -11,11 +11,11 @@ set "minute=%datetime:~10,2%"
 set "second=%datetime:~12,2%"
 
 echo.
-echo        ==========================    拉取成功    ====================
+echo    ==========================    拉取成功    ====================
 echo.
 git pull
 echo.
-echo        =========================    当前文件状态    ==================
+echo    =========================    当前文件状态    ==================
 echo.
 git status
 
@@ -31,7 +31,7 @@ if %errorlevel% equ 0 (
 
 git add .
 echo.
-echo        ==========================    添加成功    ====================
+echo    ==========================    添加成功    ====================
 echo.
 set /p userInput=请输入提交信息：
 set "defaultCommitMessage=%USERNAME% %userInput% %year%-%month%-%day% %hour%:%minute%:%second%"
@@ -44,7 +44,7 @@ if errorlevel 1 (
     exit /b
 )
 echo.
-echo        ==========================    提交成功    ====================
+echo    ==========================    提交成功    ====================
 echo.
 git push origin master
 if errorlevel 1 (
@@ -53,6 +53,6 @@ if errorlevel 1 (
     exit /b
 )
 echo.
-echo        ==========================    上传成功    ====================
+echo    ==========================    上传成功    ====================
 echo.
 timeout /t 5 
