@@ -8,7 +8,9 @@
 mysqld install
 ```
 
-   显示成功
+140文件缺失下载修复链接：https://learn.microsoft.com/zh-cn/cpp/windows/latest-supported-vc-redist?view=msvc-170
+
+显示成功
 
 再输入：
 
