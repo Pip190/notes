@@ -9,16 +9,14 @@ set "day=%datetime:~6,2%"
 set "hour=%datetime:~8,2%"
 set "minute=%datetime:~10,2%"
 set "second=%datetime:~12,2%"
-
-git pull
 echo.
 echo    ==========================    拉取成功    ====================
 echo.
-
-git status
+git pull
 echo.
 echo    =========================    当前文件状态    ==================
 echo.
+git status
 
 :: 检查是否有待提交的更改
 git diff-index --quiet HEAD --
