@@ -89,3 +89,12 @@ ALTER USER 'root'@'localhost' IDENTIFIED BY '123456';
 > ```
 
 如果服务状态显示为 "RUNNING"，则表示 MySQL 服务已经成功启动。
+
+
+
+## 删除服务指令 ##
+
+```bash
+sc delete 服务名称
+```
+
